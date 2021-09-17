@@ -2,8 +2,8 @@ import discord
 import asyncio
 
 
-async def play_sound(ctx, sound: str):
-    global voice_client
+async def play_sound(ctx, voice_client, sound: str):
+    voice_client = None
     if voice_client:
         await voice_client.disconnect()
     try:
