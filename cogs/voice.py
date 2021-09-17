@@ -13,16 +13,6 @@ class Voice(commands.Cog):
         voice_client = None
 
     @commands.command()
-    async def leave(self, ctx):
-        global voice_client
-        if(voice_client):
-            try:
-                await voice_client.disconnect()
-                await ctx.send('Э, братан, полегче... Уже выхожу.')
-            except AttributeError:
-                await ctx.send('АЫыы.. так я же не в войсе, ёпт.')
-
-    @commands.command()
     async def tts(self, ctx, *, message):
         global voice_client
         tts = gTTS(message, lang='ru')
