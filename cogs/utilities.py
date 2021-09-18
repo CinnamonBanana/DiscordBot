@@ -6,7 +6,7 @@ from discord.ext import commands
 class Utilities(commands.Cog):
 
     def __init__(self, client):
-        print("Loaded utilities cog")
+        print("***Loaded utilities cog")
         self.client = client
 
     @commands.command()

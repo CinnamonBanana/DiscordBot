@@ -9,7 +9,7 @@ from discord.ext import commands
 class Fun(commands.Cog):
 
     def __init__(self, client):
-        print("Loaded fun cog")
+        print("***Loaded fun cog")
         self.client = client
 
     async def filter(self, ctx, embedColor, memavatar, url):

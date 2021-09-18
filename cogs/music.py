@@ -252,7 +252,7 @@ class VoiceState:
 class MusicPlayer(commands.Cog):
 
     def __init__(self, client):
-        print("Loaded music cog")
+        print("***Loaded music cog")
         self.bot = client
         self.voice_states = {}
 
@@ -280,7 +280,7 @@ class MusicPlayer(commands.Cog):
     async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
         await ctx.send('Какая-то ошибка, ёпт: {}'.format(str(error)))
 
-    @commands.command(invoke_without_subcommand=True)
+    @commands.command(aliases=['j'], invoke_without_subcommand=True)
     async def join(self, ctx: commands.Context):
         destination = ctx.author.voice.channel
         if ctx.voice_state.voice:
@@ -318,7 +318,7 @@ class MusicPlayer(commands.Cog):
         ctx.voice_state.volume = volume / 100
         await ctx.send('Громкость поставил {}%'.format(volume))
 
-    @commands.command(aliases=['current', 'playing'])
+    @commands.command(aliases=['current', 'playing', 'np'])
     async def now(self, ctx: commands.Context):
         await ctx.send(embed=ctx.voice_state.current.create_embed())
 
@@ -347,7 +347,7 @@ class MusicPlayer(commands.Cog):
         finally:
             pass
 
-    @commands.command()
+    @commands.command(aliases=['s'])
     async def skip(self, ctx: commands.Context):
         if not ctx.voice_state.is_playing:
             return await ctx.send('Ничо не играет...')
@@ -370,7 +370,7 @@ class MusicPlayer(commands.Cog):
         else:
             await ctx.send('Ты ващет уже голосовал, попридержи коней.')
 
-    @commands.command()
+    @commands.command(aliases=['q'])
     async def queue(self, ctx: commands.Context, *, page: int = 1):
         if len(ctx.voice_state.songs) == 0:
             return await ctx.send('Пустой плейлист ёпты.')
@@ -410,7 +410,7 @@ class MusicPlayer(commands.Cog):
         ctx.voice_state.loop = not ctx.voice_state.loop
         await ctx.message.add_reaction('✅')
 
-    @commands.command()
+    @commands.command(aliases=['p', 'start'])
     async def play(self, ctx: commands.Context, *, search: str):
         if not ctx.voice_state.voice:
             await ctx.invoke(self.join)

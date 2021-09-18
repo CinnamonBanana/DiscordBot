@@ -7,12 +7,12 @@ from discord.ext import commands
 class Voice(commands.Cog):
 
     def __init__(self, client):
-        print("Loaded voice cog")
+        print("***Loaded voice cog")
         self.client = client
         global voice_client
         voice_client = None
 
-    @commands.command()
+    @commands.command(aliases=['say'])
     async def tts(self, ctx, *, message):
         global voice_client
         tts = gTTS(message, lang='ru')
@@ -30,7 +30,6 @@ class Voice(commands.Cog):
         reg_search = re.search(r'(\w*\s)+lore', message.content, re.IGNORECASE)
         if reg_search:
             await play.play_sound(message, voice_client, 'lore.mp3')
-        #await self.client.process_commands(message)
 
 
 def setup(client):
